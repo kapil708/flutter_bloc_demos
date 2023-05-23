@@ -28,7 +28,7 @@ class _BlocToBlocAppState extends State<BlocToBlocApp> {
       child: MaterialApp(
         title: 'Bloc Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(primarySwatch: Colors.green),
         onGenerateRoute: _appRoute.onGenerateRoute,
       ),
     );

@@ -20,7 +20,7 @@ class _MyMultiScreenAppState extends State<MyMultiScreenApp> {
       create: (context) => MultiCounterCubit(),
       child: MaterialApp(
         title: 'Bloc Demo',
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(primarySwatch: Colors.red),
         onGenerateRoute: _appRoute.onGenerateRoute,
       ),
     );

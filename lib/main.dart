@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 
+import 'api_handling/index.dart';
 import 'bloc_to_bloc/index.dart';
 import 'counter_demo/index.dart';
 import 'multi_screen_demo/index.dart';
 import 'weather/index.dart';
 
-enum Type { counter, multiScreen, blocToBloc, weatherApp }
+enum Type { counter, multiScreen, blocToBloc, weatherApp, apiHandling }
 
 void main() {
-  var defaultType = Type.weatherApp;
+  var defaultType = Type.apiHandling;
 
   switch (defaultType) {
     case Type.counter:
-      // Counter Demo
-      runApp(const MyCounterApp());
-      break;
+      return runApp(const MyCounterApp());
     case Type.multiScreen:
-      // Multi Screen Demo
-      runApp(const MyMultiScreenApp());
-      break;
+      return runApp(const MyMultiScreenApp());
     case Type.blocToBloc:
-      // Bloc to Bloc
-      runApp(const BlocToBlocApp());
-      break;
+      return runApp(const BlocToBlocApp());
     case Type.weatherApp:
-      // Bloc to Bloc
-      runApp(const WeatherApp());
-      break;
+      return runApp(const WeatherApp());
+    case Type.apiHandling:
+      return runApp(const ApiHandling());
   }
 }
