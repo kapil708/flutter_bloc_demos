@@ -32,6 +32,7 @@ class ThirdScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
+                  heroTag: "Screen 3 add",
                   backgroundColor: Colors.green,
                   onPressed: () {
                     BlocProvider.of<MultiCounterCubit>(context).decrement();
@@ -40,6 +41,7 @@ class ThirdScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 50),
                 FloatingActionButton(
+                  heroTag: "Screen 3 remove",
                   backgroundColor: Colors.green,
                   onPressed: () {
                     context.read<MultiCounterCubit>().increment();

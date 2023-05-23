@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_demos/bloc_to_bloc/logic/cubit/counter_cubit.dart';
 import 'package:flutter_bloc_demos/bloc_to_bloc/logic/cubit/internet_cubit.dart';
-import 'package:flutter_bloc_demos/multi_screen_demo/logic/cubit/counter_cubit.dart';
 
 import 'presentation/route/app_route.dart';
 
@@ -23,10 +22,12 @@ class _BlocToBlocAppState extends State<BlocToBlocApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InternetCubit>(create: (context) => InternetCubit(connectivity: connectivity)),
-        BlocProvider<CounterCubit>(create: (context) => CounterCubit(internetCubit: BlocProvider.of<InternetCubit>(context))),
+        BlocProvider<CounterCubit>(create: (context) => CounterCubit()),
+        //BlocProvider<CounterCubit>(create: (context) => CounterCubit(internetCubit: BlocProvider.of<InternetCubit>(context))),
       ],
       child: MaterialApp(
         title: 'Bloc Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
         onGenerateRoute: _appRoute.onGenerateRoute,
       ),

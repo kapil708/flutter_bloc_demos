@@ -13,15 +13,15 @@ class AppRoute {
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(value: _counterCubit, child: const HomeScreen()),
+          builder: (_) => BlocProvider.value(value: _counterCubit, key: const Key("Home"), child: const HomeScreen()),
         );
       case '/second':
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(value: _counterCubit, child: const SecondScreen()),
+          builder: (_) => BlocProvider.value(value: _counterCubit, key: const Key("Screen 2"), child: const SecondScreen()),
         );
       case '/third':
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(value: _counterCubit, child: const ThirdScreen()),
+          builder: (_) => BlocProvider.value(value: _counterCubit, key: const Key("Screen 3"), child: const ThirdScreen()),
         );
       default:
         return null;

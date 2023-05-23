@@ -44,6 +44,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
+                  heroTag: "Screen 1 add",
                   onPressed: () {
                     BlocProvider.of<MultiCounterCubit>(context).decrement();
                   },
@@ -51,6 +52,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 50),
                 FloatingActionButton(
+                  heroTag: "Screen 1 remove",
                   onPressed: () {
                     context.read<MultiCounterCubit>().increment();
                   },

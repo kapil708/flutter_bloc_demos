@@ -33,6 +33,7 @@ class SecondScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
+                  heroTag: "Screen 2 add",
                   backgroundColor: Colors.red,
                   onPressed: () {
                     BlocProvider.of<MultiCounterCubit>(context).decrement();
@@ -41,6 +42,7 @@ class SecondScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 50),
                 FloatingActionButton(
+                  heroTag: "Screen 2 remove",
                   backgroundColor: Colors.red,
                   onPressed: () {
                     context.read<MultiCounterCubit>().increment();
