@@ -8,23 +8,16 @@ import 'bloc_to_bloc/index.dart';
 import 'boilerplate/index.dart';
 import 'counter_demo/index.dart';
 import 'flutter_fly/presentation/index.dart';
+import 'infinite_list/app.dart';
 import 'multi_screen_demo/index.dart';
 import 'weather/index.dart';
 
-enum Type {
-  counter,
-  multiScreen,
-  blocToBloc,
-  weatherApp,
-  apiHandling,
-  boilerPlate,
-  flutterFly
-}
+enum Type { counter, multiScreen, blocToBloc, weatherApp, apiHandling, boilerPlate, flutterFly, infiniteList }
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var defaultType = Type.flutterFly;
+  var defaultType = Type.infiniteList;
 
   switch (defaultType) {
     case Type.counter:
@@ -39,6 +32,8 @@ void main() {
       return runApp(const ApiHandling());
     case Type.boilerPlate:
       return runApp(const BoilerPlate());
+    case Type.infiniteList:
+      return runApp(const InfiniteList());
     case Type.flutterFly:
       return runApp(
         MultiBlocProvider(
