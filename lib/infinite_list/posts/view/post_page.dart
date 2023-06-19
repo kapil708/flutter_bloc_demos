@@ -13,7 +13,7 @@ class PostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Post list")),
-      body: BlocProvider<PostBloc>(
+      body: BlocProvider(
         create: (context) => PostBloc()..add(PostFetched()),
         child: const PostBody(),
       ),
@@ -42,30 +42,32 @@ class _PostBodyState extends State<PostBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(builder: (context, state) {
-      // if post is initial
-      if (state is PostInitial) {
-        return const Center(child: CircularProgressIndicator());
-      }
-
-      // if post is loaded
-      if (state is PostLoaded) {
-        if (state.posts.isEmpty) {
-          return const Center(child: Text("No Post"));
+    return BlocBuilder<PostBloc, PostState>(
+      builder: (context, state) {
+        // if post is initial
+        if (state is PostInitial) {
+          return const Center(child: CircularProgressIndicator());
         }
 
-        return RefreshIndicator(
-          onRefresh: _onRefresh,
-          child: PostList(
-            scrollController: _scrollController,
-            state: state,
-          ),
-        );
-      }
+        // if post is loaded
+        if (state is PostLoaded) {
+          if (state.posts.isEmpty) {
+            return const Center(child: Text("No Post"));
+          }
 
-      // if post is error
-      return const Text("Failed to fetch post");
-    });
+          return RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: PostList(
+              scrollController: _scrollController,
+              state: state,
+            ),
+          );
+        }
+
+        // if post is error
+        return const Text("Failed to fetch post");
+      },
+    );
   }
 
   @override

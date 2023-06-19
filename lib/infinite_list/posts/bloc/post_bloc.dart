@@ -6,35 +6,29 @@ import 'post_event.dart';
 import 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  PostBloc() : super(PostInitial());
+  PostBloc() : super(PostInitial()) {
+    on<PostRefresh>((event, emit) {
+      emit(PostInitial());
+      add(PostFetched());
+    });
+    on<PostFetched>((event, emit) async {
+      try {
+        List<Post> posts;
 
-  @override
-  Stream<PostState> mapEventToState(PostEvent event) async* {
-    if (event is PostFetched) {
-      yield await _mapPostToState(state);
-    }
+        if (state is PostInitial) {
+          posts = await PostApi.fetchPost(0, 10);
+          emit(PostLoaded(posts: posts));
+        }
 
-    if (event is PostRefresh) {
-      yield PostInitial();
-
-      yield await _mapPostToState(state);
-    }
-  }
-
-  Future<PostState> _mapPostToState(PostState state) async {
-    List<Post> posts;
-
-    try {
-      if (state is PostInitial) {
-        posts = await PostApi.fetchPost(0, 10);
-        return PostLoaded(posts: posts);
+        if (state is PostLoaded) {
+          PostLoaded postLoadedState = state as PostLoaded;
+          posts = await PostApi.fetchPost(postLoadedState.posts.length, 10);
+          emit(posts.isEmpty ? PostLoaded(posts: postLoadedState.posts, hasReachedMax: true) : PostLoaded(posts: postLoadedState.posts + posts));
+        }
+      } on Exception catch (e) {
+        print(e);
+        emit(PostError());
       }
-
-      PostLoaded postLoaded = state as PostLoaded;
-      posts = await PostApi.fetchPost(postLoaded.posts.length, 10);
-      return posts.isEmpty ? state.copyWith(hasReachedMax: true) : state.copyWith(posts: postLoaded.posts + posts);
-    } on Exception catch (_) {
-      return PostError();
-    }
+    });
   }
 }
